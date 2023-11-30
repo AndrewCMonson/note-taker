@@ -1,16 +1,14 @@
 const notes = require('express').Router();
-const { writeToFile } = require('../helpers/fsUtils');
-const { readFromFile, readAndAppend } = require('../helpers/fsUtils');
+const { readFromFile, readAndAppend, writeToFile } = require('../helpers/fsUtils');
 const uuid = require('uuid');
 
+// Reads the db.json file and returns all saved notes as JSON.
 notes.get('/', (req, res) => {
-    // console.log('GET request for notes page');
     readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
+// Receives a new note to save on the request body, adds it to the db.json file, and then returns the new note to the client.
 notes.post('/', (req, res) => {
-    console.log('POST request for notes page');
-
     const { title, text } = req.body;
 
     if (title && text) {
@@ -27,15 +25,14 @@ notes.post('/', (req, res) => {
     }
 });
 
+// Deletes the note with an id equal to req.params.id.
 notes.delete('/:id', (req, res) => {
-    console.log('DELETE request for notes page');
     const noteId = req.params.id;
 
     readFromFile('./db/db.json')
         .then((data) => JSON.parse(data))
         .then((json) => {
             const result = json.filter((note) => note.noteId !== noteId);
-            console.log(result);
 
             writeToFile('./db/db.json', result);
             res.json(`Item ${noteId} has been deleted 🗑️`);
