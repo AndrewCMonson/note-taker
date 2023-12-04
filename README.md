@@ -31,7 +31,9 @@ Run the application in the terminal. No testing should be required
 
 ## Screenshots
 ![Alt text](<public/resources/Screenshot 2023-12-01 154509.png>)
+### Screenshot of saved notes
 ![Alt text](<public/resources/Screenshot 2023-12-01 154443.png>)
+### Screenshot of saved notes after note deletion
 ![Alt text](<public/resources/Screenshot 2023-12-01 154454.png>)
 
 ## Contact
